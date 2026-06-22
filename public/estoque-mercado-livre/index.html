@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gestao de Estoque para Vendedores do Mercado Livre</title>
+  <meta name="description" content="Como gerenciar o estoque para vender no ML sem ruptura e sem capital imobilizado em excesso. Indicadores essenciais e boas praticas." />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://sobrouquantoml.prospectia.space/estoque-mercado-livre/" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="https://sobrouquantoml.prospectia.space/estoque-mercado-livre/" />
+  <meta property="og:title" content="Gestao de Estoque para Vendedores do Mercado Livre" />
+  <meta property="og:description" content="Como gerenciar o estoque para vender no ML sem ruptura e sem capital imobilizado em excesso. Indicadores essenciais e boas praticas." />
+  <meta property="og:locale" content="pt_BR" />
+  <meta property="og:site_name" content="Sobrou Quanto ML" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "Gestao de estoque no Mercado Livre: como evitar ruptura e excesso",
+    "description": "Como gerenciar o estoque para vender no ML sem ruptura e sem capital imobilizado em excesso. Indicadores essenciais e boas praticas.",
+    "url": "https://sobrouquantoml.prospectia.space/estoque-mercado-livre/",
+    "datePublished": "2026-03-14",
+    "dateModified": "2026-03-14",
+    "author": { "@type": "Organization", "name": "Sobrou Quanto ML" },
+    "publisher": { "@type": "Organization", "name": "Sobrou Quanto ML", "url": "https://sobrouquantoml.prospectia.space/" }
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Inicio", "item": "https://sobrouquantoml.prospectia.space/" },
+      { "@type": "ListItem", "position": 2, "name": "Gestao de estoque no Mercado Livre: como evitar ruptura e excesso", "item": "https://sobrouquantoml.prospectia.space/estoque-mercado-livre/" }
+    ]
+  }
+  </script>
+
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --blue:      #2563EB;
+      --blue-dark: #1D4ED8;
+      --blue-deep: #162035;
+      --blue-bg:   #EFF6FF;
+      --blue-soft: #DBEAFE;
+      --green:     #10B981;
+      --dark:      #0f111a;
+      --muted:     #6A82A8;
+      --border:    #E2E8F0;
+      --gray-light:#F8FAFC;
+      --white:     #ffffff;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Inter', sans-serif; color: var(--dark); background: var(--white); line-height: 1.7; }
+
+    /* NAV */
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(255,255,255,.96); backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 24px; height: 64px;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .nav-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--dark); font-weight: 700; font-size: 1rem; }
+    .nav-logo-icon { width: 32px; height: 32px; border-radius: 8px; background: var(--blue); display: flex; align-items: center; justify-content: center; color: #fff; font-size: .85rem; font-weight: 800; }
+    .nav-logo em { color: var(--blue); font-style: normal; }
+    .nav-logo small { font-weight: 400; color: var(--muted); font-size: .72rem; margin-left: 4px; }
+    .nav-cta { background: var(--blue); color: #fff; border: none; border-radius: 8px; padding: 8px 20px; font-size: .875rem; font-weight: 600; cursor: pointer; text-decoration: none; transition: background .2s; }
+    .nav-cta:hover { background: var(--blue-dark); }
+
+    /* BREADCRUMB */
+    .breadcrumb { max-width: 800px; margin: 0 auto; padding: 14px 24px 0; font-size: .78rem; color: var(--muted); display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
+    .breadcrumb a { color: var(--blue); text-decoration: none; }
+    .breadcrumb a:hover { text-decoration: underline; }
+
+    /* LAYOUT */
+    .page-wrapper { max-width: 800px; margin: 0 auto; padding: 32px 24px 80px; }
+
+    /* HERO */
+    .article-tag { display: inline-block; background: var(--blue-bg); color: var(--blue); font-size: .72rem; font-weight: 700; padding: 4px 12px; border-radius: 20px; margin-bottom: 16px; text-transform: uppercase; letter-spacing: .06em; }
+    .article-hero h1 { font-size: clamp(1.55rem, 4vw, 2.1rem); font-weight: 800; line-height: 1.25; color: var(--dark); margin-bottom: 16px; }
+    .article-hero .lead { font-size: 1.05rem; color: #374151; line-height: 1.75; margin-bottom: 18px; }
+    .article-meta { font-size: .78rem; color: var(--muted); display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 40px; padding-bottom: 24px; border-bottom: 1px solid var(--border); }
+
+    /* CONTEUDO */
+    .article-content h2 { font-size: 1.3rem; font-weight: 700; color: var(--dark); margin: 36px 0 14px; padding-bottom: 8px; border-bottom: 2px solid var(--blue-soft); }
+    .article-content h3 { font-size: 1.05rem; font-weight: 600; color: var(--dark); margin: 26px 0 10px; }
+    .article-content p { color: #374151; margin-bottom: 16px; font-size: .97rem; }
+    .article-content strong { color: var(--dark); }
+    .article-content ul, .article-content ol { margin: 12px 0 20px 22px; color: #374151; }
+    .article-content li { margin-bottom: 8px; font-size: .97rem; }
+
+    /* TABELA */
+    .table-wrapper { overflow-x: auto; margin: 24px 0; border-radius: 12px; border: 1px solid var(--border); }
+    table { width: 100%; border-collapse: collapse; font-size: .88rem; }
+    thead { background: var(--blue-deep); color: #fff; }
+    thead th { padding: 12px 16px; text-align: left; font-weight: 600; font-size: .78rem; text-transform: uppercase; letter-spacing: .04em; }
+    tbody tr { border-bottom: 1px solid var(--border); }
+    tbody tr:last-child { border-bottom: none; }
+    tbody tr:nth-child(even) { background: var(--gray-light); }
+    tbody td { padding: 11px 16px; color: #374151; }
+    tbody td strong { color: var(--dark); }
+
+    /* CALLOUT */
+    .callout { background: var(--blue-bg); border-left: 4px solid var(--blue); border-radius: 0 10px 10px 0; padding: 18px 20px; margin: 28px 0; }
+    .callout p { margin: 0; color: #1E3A8A; font-size: .94rem; }
+    .callout-warn { background: #FEF3C7; border-left-color: #F59E0B; }
+    .callout-warn p { color: #78350F; }
+    .callout-green { background: #F0FDF4; border-left-color: var(--green); }
+    .callout-green p { color: #14532D; }
+
+    /* BENEFIT CARDS */
+    .benefit-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 14px; margin: 24px 0; }
+    .benefit-card { background: var(--gray-light); border: 1px solid var(--border); border-radius: 12px; padding: 18px; }
+    .benefit-card .b-icon { font-size: 1.3rem; margin-bottom: 8px; }
+    .benefit-card h4 { font-size: .92rem; font-weight: 700; margin-bottom: 5px; color: var(--dark); }
+    .benefit-card p { font-size: .83rem; color: var(--muted); margin: 0; }
+
+    /* CTA BOX */
+    .cta-box { background: linear-gradient(135deg, var(--blue-deep) 0%, #0C1523 100%); border-radius: 16px; padding: 40px 32px; text-align: center; margin: 52px 0 0; border: 1px solid #1F2E47; }
+    .cta-box .cta-label { font-size: .72rem; font-weight: 700; color: #60A5FA; text-transform: uppercase; letter-spacing: .09em; margin-bottom: 12px; }
+    .cta-box h2 { font-size: 1.5rem; font-weight: 800; color: #fff; margin-bottom: 10px; line-height: 1.3; border: none; padding: 0; }
+    .cta-box p { color: #94A3B8; font-size: .94rem; margin-bottom: 24px; max-width: 480px; margin-left: auto; margin-right: auto; }
+    .btn-primary { display: inline-block; background: var(--blue); color: #fff; font-weight: 700; font-size: 1rem; padding: 14px 34px; border-radius: 10px; text-decoration: none; transition: background .2s, transform .15s; }
+    .btn-primary:hover { background: var(--blue-dark); transform: translateY(-2px); }
+    .cta-sub { margin-top: 12px; font-size: .78rem; color: #64748B; }
+
+    /* FOOTER */
+    footer { background: var(--dark); color: #94A3B8; text-align: center; padding: 32px 24px; font-size: .82rem; line-height: 2; }
+    footer a { color: #60A5FA; text-decoration: none; }
+    footer a:hover { text-decoration: underline; }
+    .footer-logo { color: #fff; font-weight: 700; font-size: .95rem; margin-bottom: 4px; }
+    .footer-logo em { color: var(--blue); font-style: normal; }
+
+    @media (max-width: 600px) {
+      .page-wrapper { padding: 24px 16px 60px; }
+      .cta-box { padding: 28px 20px; }
+      .cta-box h2 { font-size: 1.25rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="https://sobrouquantoml.prospectia.space/" class="nav-logo">
+      <div class="nav-logo-icon">$</div>
+      <span>Sobrou<em>Quanto</em>ML<small>by ProspectIA</small></span>
+    </a>
+    <a href="https://sobrouquantoml.prospectia.space/" class="nav-cta">Comecar gratis</a>
+  </nav>
+
+  <div class="breadcrumb">
+    <a href="https://sobrouquantoml.prospectia.space/">Inicio</a>
+    <span>›</span>
+    <span>Gestao de estoque no Mercado Livre: como evitar ruptura e excesso</span>
+  </div>
+
+  <main class="page-wrapper">
+
+    <header class="article-hero">
+      <div class="article-tag">Logistica e Operacao</div>
+      <h1>Gestao de estoque no Mercado Livre: como evitar ruptura e excesso</h1>
+      <p class="lead">Estoque demais paralisa capital. Estoque de menos perde venda e prejudica reputacao. Encontrar o ponto certo e um dos maiores desafios operacionais de quem vende no ML — e ele muda todo mes.</p>
+      <div class="article-meta">
+        <span>Atualizado em 14/03/2026</span>
+        <span>· 5 min de leitura</span>
+      </div>
+    </header>
+
+    <article class="article-content">
+      
+<h2>Os dois problemas do estoque mal gerenciado</h2>
+<h3>Estoque excessivo — capital morto</h3>
+<p>Produto parado no estoque e capital imobilizado que nao gera retorno. Alem disso, produtos parados por muito tempo tem risco de obsolescencia, dano fisico ou necessidade de liquidacao abaixo do custo.</p>
+
+<h3>Ruptura de estoque — venda perdida e reputacao danificada</h3>
+<p>Anuncio pausado por falta de produto perde posicao no ranking. Pior: se a venda foi realizada e voce nao tem o produto para despachar, gera cancelamento — o indicador que mais prejudica a reputacao no ML.</p>
+
+<h2>Indicadores essenciais de estoque</h2>
+<div class="table-wrapper">
+  <table>
+    <thead><tr><th>Indicador</th><th>Calculo</th><th>Para que serve</th></tr></thead>
+    <tbody>
+      <tr><td>Giro de estoque</td><td>CMV / Estoque medio</td><td>Quantas vezes o estoque "girou" no periodo</td></tr>
+      <tr><td>Dias de estoque</td><td>Estoque atual / Venda media diaria</td><td>Quantos dias o estoque atual dura</td></tr>
+      <tr><td>Estoque de seguranca</td><td>Venda diaria media x Prazo do fornecedor</td><td>Quantidade minima para nao ter ruptura</td></tr>
+      <tr><td>Ponto de pedido</td><td>Estoque de seguranca + Consumo no prazo de reposicao</td><td>Quando pedir mais ao fornecedor</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<h2>Como calcular o estoque ideal por produto</h2>
+<ol>
+  <li>Calcule a venda media diaria do produto nos ultimos 30 a 60 dias</li>
+  <li>Multiplique pelo prazo de reposicao do fornecedor (em dias)</li>
+  <li>Adicione um buffer de seguranca de 20% a 30% para oscilacoes</li>
+  <li>Esse e o estoque minimo que voce deve ter sempre disponivel</li>
+</ol>
+<p>Exemplo: produto com 5 vendas/dia, fornecedor com prazo de 10 dias. Estoque minimo = 5 x 10 x 1,25 = <strong>62 unidades</strong>.</p>
+
+<h2>Produtos lentos: o que fazer</h2>
+<p>Se um produto tem giro muito baixo (menos de uma venda por semana), avalie:</p>
+<ul>
+  <li>Reducao de preco para acelerar a saida (dentro dos limites da margem)</li>
+  <li>Combo com produto de alto giro para criar bundle</li>
+  <li>Cancelamento do produto — liberar o capital para produtos com melhor performance</li>
+</ul>
+
+    </article>
+
+    <div class="cta-box">
+      <div class="cta-label">Sobrou Quanto ML</div>
+      <h2>Monitore o resultado de cada produto para otimizar o estoque</h2>
+      <p>Veja quais produtos geram mais lucro e qual o volume de vendas mensal real para calcular o estoque ideal com dados concretos.</p>
+      <a href="https://sobrouquantoml.prospectia.space/" class="btn-primary">Comecar 7 dias gratis</a>
+      <div class="cta-sub">Sem cartao de credito · Cancele quando quiser</div>
+    </div>
+
+  </main>
+
+  <footer>
+    <div class="footer-logo">Sobrou<em>Quanto</em>ML</div>
+    <p>
+      <a href="https://sobrouquantoml.prospectia.space/">Home</a> ·
+      <a href="https://sobrouquantoml.prospectia.space/politica.html">Politica de privacidade</a>
+    </p>
+    <p>2026 Sobrou Quanto ML · by ProspectIA · Todos os direitos reservados.</p>
+  </footer>
+
+</body>
+</html>

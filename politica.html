@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Política de Privacidade — Sobrou Quanto ML</title>
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg"/>
+  <link rel="shortcut icon" href="/favicon.svg"/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --blue:#2563EB; --blue-dark:#1D4ED8; --blue-bg:#EFF6FF; --blue-soft:#E8EEFF;
+      --green:#10B981; --green-dark:#059669;
+      --dark:#0f111a; --dark2:#0C1523; --dark3:#162035;
+      --muted:#6A82A8; --border:#E2E8F0; --gray-light:#F4F6FB; --white:#ffffff;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Inter', sans-serif; color: var(--dark); background: var(--white); line-height: 1.7; }
+
+    /* NAV */
+    nav {
+      position: sticky; top: 0; z-index: 99;
+      height: 62px; background: rgba(255,255,255,0.97); backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border); display: flex; align-items: center;
+      padding: 0 6%; box-shadow: 0 2px 12px rgba(37,99,235,0.07);
+    }
+    .nav-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+    .nav-logo-icon {
+      width: 36px; height: 36px; background: linear-gradient(135deg,#1e3a5f,#2563EB);
+      border-radius: 9px; display: flex; align-items: center; justify-content: center;
+      color: white; font-size: 14px; font-weight: 900; box-shadow: 0 3px 10px rgba(37,99,235,.3);
+    }
+    .nav-logo-name { font-size: 15px; font-weight: 800; color: var(--dark); letter-spacing: -.3px; }
+    .nav-logo-name em { font-style: normal; color: var(--blue); }
+    .nav-logo-by { font-size: 10px; color: var(--muted); font-weight: 500; margin-top: 1px; }
+    .nav-back {
+      margin-left: auto; font-size: 13px; font-weight: 600; color: var(--blue);
+      text-decoration: none; padding: 8px 18px; border-radius: 8px;
+      border: 1.5px solid var(--blue-bg); background: var(--blue-bg);
+      transition: background .2s, border-color .2s;
+    }
+    .nav-back:hover { background: var(--blue-soft); border-color: var(--blue); }
+
+    /* HERO */
+    .hero {
+      background: linear-gradient(155deg, #EFF6FF 0%, #E8EEFF 60%, #f0fdf9 100%);
+      padding: 56px 6% 48px; text-align: center;
+      border-bottom: 1px solid var(--border);
+    }
+    .hero-tag {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: white; border: 1px solid var(--border); color: var(--blue);
+      font-size: 11px; font-weight: 700; padding: 5px 14px; border-radius: 100px;
+      margin-bottom: 18px; box-shadow: 0 2px 8px rgba(37,99,235,.08);
+    }
+    .hero h1 { font-size: clamp(24px, 3vw, 38px); font-weight: 900; letter-spacing: -1px; color: var(--dark); margin-bottom: 12px; }
+    .hero-sub { font-size: 15px; color: var(--muted); max-width: 480px; margin: 0 auto; }
+    .hero-meta { margin-top: 20px; font-size: 12px; color: var(--muted); }
+    .hero-meta strong { color: var(--dark); }
+
+    /* CONTENT */
+    .container { max-width: 760px; margin: 0 auto; padding: 52px 24px 80px; }
+
+    .toc {
+      background: var(--gray-light); border: 1px solid var(--border);
+      border-radius: 14px; padding: 22px 26px; margin-bottom: 48px;
+    }
+    .toc-title { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: .06em; color: var(--muted); margin-bottom: 14px; }
+    .toc ol { padding-left: 18px; display: flex; flex-direction: column; gap: 7px; }
+    .toc li { font-size: 14px; }
+    .toc a { color: var(--blue); text-decoration: none; font-weight: 500; transition: color .2s; }
+    .toc a:hover { color: var(--blue-dark); text-decoration: underline; }
+
+    .section { margin-bottom: 44px; }
+    .section-num {
+      display: inline-block; background: var(--blue-bg); color: var(--blue);
+      font-size: 11px; font-weight: 800; padding: 3px 11px; border-radius: 99px;
+      margin-bottom: 10px; letter-spacing: .04em;
+    }
+    .section h2 {
+      font-size: clamp(18px, 2vw, 22px); font-weight: 800; letter-spacing: -.4px;
+      color: var(--dark); margin-bottom: 14px; padding-bottom: 10px;
+      border-bottom: 2px solid var(--blue-bg);
+    }
+    .section h3 { font-size: 15px; font-weight: 700; color: var(--dark); margin: 20px 0 8px; }
+    .section p { font-size: 15px; color: #374151; line-height: 1.8; margin-bottom: 14px; }
+    .section ul, .section ol { padding-left: 20px; margin-bottom: 14px; display: flex; flex-direction: column; gap: 8px; }
+    .section li { font-size: 15px; color: #374151; line-height: 1.7; }
+    .section li::marker { color: var(--blue); }
+
+    .highlight {
+      background: var(--blue-bg); border-left: 3px solid var(--blue);
+      border-radius: 0 10px 10px 0; padding: 14px 18px; margin: 18px 0;
+      font-size: 14px; color: var(--dark); line-height: 1.7;
+    }
+    .highlight strong { color: var(--blue); }
+
+    .contact-box {
+      background: var(--dark2); border-radius: 14px; padding: 28px 32px;
+      margin-top: 20px;
+    }
+    .contact-box h3 { font-size: 16px; font-weight: 700; color: white; margin-bottom: 16px; }
+    .contact-item { display: flex; align-items: flex-start; gap: 12px; margin-bottom: 12px; }
+    .contact-item-icon {
+      width: 32px; height: 32px; border-radius: 8px; background: rgba(37,99,235,.25);
+      display: flex; align-items: center; justify-content: center; font-size: 14px; flex-shrink: 0;
+    }
+    .contact-item-text { font-size: 14px; color: rgba(255,255,255,.75); line-height: 1.6; }
+    .contact-item-text strong { color: white; display: block; margin-bottom: 2px; }
+
+    /* FOOTER */
+    footer {
+      background: var(--dark); border-top: 1px solid var(--dark3);
+      padding: 28px 6%; text-align: center;
+    }
+    .footer-logo { display: flex; align-items: center; justify-content: center; gap: 10px; margin-bottom: 12px; }
+    .footer-logo-name { font-size: 14px; font-weight: 800; color: white; }
+    .footer-logo-name em { font-style: normal; color: var(--blue); }
+    footer p { font-size: 13px; color: var(--muted); }
+    footer a { color: var(--blue); text-decoration: none; }
+    footer a:hover { text-decoration: underline; }
+
+    @media (max-width: 640px) {
+      .container { padding: 36px 20px 60px; }
+      .contact-box { padding: 22px 20px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="landing.html" class="nav-logo">
+    <div class="nav-logo-icon">$</div>
+    <div>
+      <div class="nav-logo-name">Sobrou <em>Quanto</em> ML</div>
+      <div class="nav-logo-by">by ProspectIA</div>
+    </div>
+  </a>
+  <a href="landing.html" class="nav-back">← Voltar ao site</a>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-tag">📄 Documento oficial</div>
+  <h1>Política de Privacidade</h1>
+  <p class="hero-sub">Explicamos de forma clara como coletamos, usamos e protegemos seus dados pessoais.</p>
+  <p class="hero-meta">Responsável: <strong>ProspectIA</strong> &nbsp;·&nbsp; Última atualização: <strong id="dataAtual"></strong></p>
+</div>
+
+<!-- CONTENT -->
+<div class="container">
+
+  <!-- SUMÁRIO -->
+  <div class="toc">
+    <div class="toc-title">Neste documento</div>
+    <ol>
+      <li><a href="#s1">Quem somos</a></li>
+      <li><a href="#s2">Dados que coletamos</a></li>
+      <li><a href="#s3">Como utilizamos seus dados</a></li>
+      <li><a href="#s4">Compartilhamento de dados</a></li>
+      <li><a href="#s5">Armazenamento e segurança</a></li>
+      <li><a href="#s6">Por quanto tempo mantemos seus dados</a></li>
+      <li><a href="#s7">Seus direitos (LGPD)</a></li>
+      <li><a href="#s8">Cookies e tecnologias similares</a></li>
+      <li><a href="#s9">Menores de idade</a></li>
+      <li><a href="#s10">Alterações nesta política</a></li>
+      <li><a href="#s11">Contato</a></li>
+    </ol>
+  </div>
+
+  <!-- 1 -->
+  <div class="section" id="s1">
+    <div class="section-num">01</div>
+    <h2>Quem Somos</h2>
+    <p>O <strong>Sobrou Quanto ML</strong> é um produto desenvolvido e operado pela <strong>ProspectIA</strong>. Neste documento, "nós", "nosso" ou "ProspectIA" se referem à empresa responsável pelo serviço. "Você" ou "usuário" se refere a qualquer pessoa que acessa ou utiliza a plataforma Sobrou Quanto ML.</p>
+    <p>Levamos a privacidade dos nossos usuários muito a sério. Esta Política de Privacidade descreve quais dados coletamos, como os utilizamos, com quem os compartilhamos e quais são os seus direitos, em conformidade com a <strong>Lei Geral de Proteção de Dados (LGPD — Lei nº 13.709/2018)</strong>.</p>
+  </div>
+
+  <!-- 2 -->
+  <div class="section" id="s2">
+    <div class="section-num">02</div>
+    <h2>Dados que Coletamos</h2>
+    <h3>Dados fornecidos por você</h3>
+    <p>Ao criar uma conta e utilizar o Sobrou Quanto ML, coletamos:</p>
+    <ul>
+      <li>Nome completo</li>
+      <li>Endereço de e-mail</li>
+      <li>Senha (armazenada de forma criptografada — nunca em texto puro)</li>
+      <li>Dados financeiros que você importa: relatórios de vendas do Mercado Livre, planilhas de custos, lançamentos manuais no DRE e tabelas de precificação</li>
+    </ul>
+    <h3>Dados coletados automaticamente</h3>
+    <p>Durante o uso da plataforma, podemos coletar automaticamente:</p>
+    <ul>
+      <li>Data e hora de acesso</li>
+      <li>Tipo de dispositivo e navegador utilizado</li>
+      <li>Endereço IP</li>
+      <li>Páginas e funcionalidades acessadas dentro da plataforma</li>
+    </ul>
+  </div>
+
+  <!-- 3 -->
+  <div class="section" id="s3">
+    <div class="section-num">03</div>
+    <h2>Como Utilizamos seus Dados</h2>
+    <p>Utilizamos os dados coletados exclusivamente para as seguintes finalidades:</p>
+    <ul>
+      <li>Criar e gerenciar sua conta de usuário</li>
+      <li>Processar e exibir os relatórios financeiros da sua operação no Mercado Livre</li>
+      <li>Calcular lucro líquido, DRE, margens e precificação com base nos dados que você importa</li>
+      <li>Salvar seu histórico de meses para consulta futura</li>
+      <li>Responder chamados de suporte abertos por você</li>
+      <li>Enviar comunicações relacionadas ao serviço, como confirmação de cadastro e atualizações importantes</li>
+      <li>Melhorar continuamente as funcionalidades da plataforma</li>
+    </ul>
+    <div class="highlight">
+      <strong>Importante:</strong> Seus dados financeiros são utilizados exclusivamente para gerar os relatórios dentro da plataforma. Não analisamos, vendemos nem compartilhamos esses dados com terceiros.
+    </div>
+  </div>
+
+  <!-- 4 -->
+  <div class="section" id="s4">
+    <div class="section-num">04</div>
+    <h2>Compartilhamento de Dados</h2>
+    <p>A ProspectIA <strong>não vende, aluga nem compartilha</strong> seus dados pessoais com terceiros para fins comerciais ou de marketing.</p>
+    <p>Seus dados podem ser compartilhados apenas nas seguintes situações:</p>
+    <ul>
+      <li>Com provedores de serviço essenciais para o funcionamento da plataforma (como serviços de hospedagem e banco de dados), contratualmente obrigados a proteger suas informações</li>
+      <li>Quando exigido por lei, ordem judicial ou autoridade competente</li>
+      <li>Para proteger os direitos, propriedade ou segurança da ProspectIA, dos nossos usuários ou do público</li>
+    </ul>
+  </div>
+
+  <!-- 5 -->
+  <div class="section" id="s5">
+    <div class="section-num">05</div>
+    <h2>Armazenamento e Segurança dos Dados</h2>
+    <p>Os dados da plataforma são armazenados de forma segura utilizando infraestrutura em nuvem com <strong>criptografia em trânsito (HTTPS/TLS)</strong> e em repouso. As senhas são armazenadas utilizando algoritmos de hash seguros — nunca em texto legível.</p>
+    <p>Adotamos medidas técnicas e organizacionais adequadas para proteger seus dados contra acesso não autorizado, perda acidental, alteração ou destruição.</p>
+    <p>Em caso de incidente de segurança que possa afetar seus dados, notificaremos você e as autoridades competentes nos prazos previstos pela LGPD.</p>
+  </div>
+
+  <!-- 6 -->
+  <div class="section" id="s6">
+    <div class="section-num">06</div>
+    <h2>Por Quanto Tempo Mantemos seus Dados</h2>
+    <p>Mantemos seus dados enquanto sua conta estiver ativa. Caso você solicite o encerramento da conta, seus dados pessoais e financeiros serão excluídos em até <strong>30 dias</strong>, salvo quando a retenção for exigida por obrigação legal.</p>
+  </div>
+
+  <!-- 7 -->
+  <div class="section" id="s7">
+    <div class="section-num">07</div>
+    <h2>Seus Direitos (LGPD)</h2>
+    <p>Em conformidade com a LGPD, você tem os seguintes direitos sobre seus dados pessoais:</p>
+    <ul>
+      <li>Confirmação da existência de tratamento dos seus dados</li>
+      <li>Acesso aos dados que temos sobre você</li>
+      <li>Correção de dados incompletos, inexatos ou desatualizados</li>
+      <li>Anonimização, bloqueio ou eliminação de dados desnecessários ou tratados em desconformidade com a LGPD</li>
+      <li>Portabilidade dos dados a outro fornecedor de serviço</li>
+      <li>Eliminação dos dados tratados com base no seu consentimento</li>
+      <li>Revogação do consentimento a qualquer momento</li>
+    </ul>
+    <p>Para exercer qualquer um desses direitos, entre em contato pelo suporte dentro da plataforma ou pelo WhatsApp indicado no site.</p>
+  </div>
+
+  <!-- 8 -->
+  <div class="section" id="s8">
+    <div class="section-num">08</div>
+    <h2>Cookies e Tecnologias Similares</h2>
+    <p>O Sobrou Quanto ML pode utilizar <strong>cookies de sessão</strong> e armazenamento local para manter você autenticado e lembrar preferências de uso, como o tema escolhido (claro ou escuro). Esses dados são armazenados exclusivamente no seu dispositivo e não são enviados a terceiros.</p>
+    <p>Não utilizamos cookies de rastreamento ou publicidade neste momento.</p>
+  </div>
+
+  <!-- 9 -->
+  <div class="section" id="s9">
+    <div class="section-num">09</div>
+    <h2>Menores de Idade</h2>
+    <p>O Sobrou Quanto ML é destinado exclusivamente a pessoas <strong>maiores de 18 anos</strong>. Não coletamos intencionalmente dados de menores de idade. Caso identifiquemos que um menor forneceu dados sem autorização dos responsáveis, excluiremos essas informações imediatamente.</p>
+  </div>
+
+  <!-- 10 -->
+  <div class="section" id="s10">
+    <div class="section-num">10</div>
+    <h2>Alterações nesta Política</h2>
+    <p>Podemos atualizar esta Política de Privacidade periodicamente para refletir mudanças nas nossas práticas ou na legislação aplicável. Quando fizermos alterações relevantes, notificaremos você por e-mail ou por aviso destacado na plataforma.</p>
+    <p>O uso continuado da plataforma após a publicação de alterações constitui aceitação da nova Política.</p>
+  </div>
+
+  <!-- 11 -->
+  <div class="section" id="s11">
+    <div class="section-num">11</div>
+    <h2>Contato e Canal de Privacidade</h2>
+    <p>Se você tiver dúvidas, solicitações ou reclamações sobre esta Política ou sobre o tratamento dos seus dados, entre em contato conosco:</p>
+    <div class="contact-box">
+      <h3>Fale com a ProspectIA</h3>
+      <div class="contact-item">
+        <div class="contact-item-icon">💬</div>
+        <div class="contact-item-text">
+          <strong>Suporte pelo painel</strong>
+          Acesse a seção "Suporte" dentro da plataforma e abra um chamado. Respondemos em até 2 dias úteis.
+        </div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-item-icon">📱</div>
+        <div class="contact-item-text">
+          <strong>WhatsApp</strong>
+          <a href="https://wa.me/5518996254570" target="_blank" rel="noopener" style="color:#6EE7B7">(18) 99625-4570</a>
+        </div>
+      </div>
+      <div class="contact-item" style="margin-bottom:0">
+        <div class="contact-item-icon">⏱</div>
+        <div class="contact-item-text">
+          <strong>Prazo de resposta</strong>
+          Até 15 dias úteis para solicitações formais relativas à LGPD.
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">
+    <div class="nav-logo-icon">$</div>
+    <div class="footer-logo-name">Sobrou <em>Quanto</em> ML</div>
+  </div>
+  <p>ProspectIA · Todos os direitos reservados · <a href="landing.html">Voltar ao site</a></p>
+</footer>
+
+<script>
+  const d = new Date();
+  document.getElementById('dataAtual').textContent = d.toLocaleDateString('pt-BR', { day:'2-digit', month:'long', year:'numeric' });
+</script>
+
+</body>
+</html>

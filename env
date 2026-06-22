@@ -1,0 +1,9 @@
+# ─────────────────────────────────────────────────────────────────
+# ARQUIVO .env — NUNCA COMPARTILHE ESTE ARQUIVO
+# NUNCA suba para o GitHub, nunca mande para ninguém
+# ─────────────────────────────────────────────────────────────────
+
+# Suas credenciais do Supabase
+# Encontre em: supabase.com → seu projeto → Settings → API
+VITE_SUPABASE_URL=https://llsjzjuyooopqxiunkbj.supabase.co
+VITE_SUPABASE_ANON_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imxsc2p6anV5b29vcHF4aXVua2JqIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzE3OTY0MDYsImV4cCI6MjA4NzM3MjQwNn0.5OIhniZtlmMb5BvGL1wJ3vFyrG8g3RVf5zjmnn83uTg

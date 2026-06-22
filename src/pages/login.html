@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Entrar — Sobrou Quanto ML</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --blue:       #2563EB;
+      --blue-dark:  #1D4ED8;
+      --blue-bg:    #EFF6FF;
+      --blue-soft:  #E8EEFF;
+      --green:      #10B981;
+      --green-dark: #059669;
+      --green-light:#D1FAE5;
+      --dark:       #0f111a;
+      --muted:      #6A82A8;
+      --border:     #E2E8F0;
+      --white:      #ffffff;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(155deg, #EFF6FF 0%, #E8EEFF 45%, #f0fdf9 100%);
+      min-height: 100vh;
+      color: var(--dark);
+    }
+    @keyframes fadeUp { from { opacity:0; transform:translateY(20px); } to { opacity:1; transform:none; } }
+    @keyframes spin   { to { transform: rotate(360deg); } }
+    @keyframes pulse  { 0%,100% { opacity:1; } 50% { opacity:.35; } }
+
+    /* ── NAVBAR ── */
+    nav {
+      position: fixed; top:0; left:0; right:0; z-index:999;
+      height:66px; background:rgba(255,255,255,0.97);
+      backdrop-filter:blur(16px); border-bottom:1px solid var(--border);
+      display:flex; align-items:center; padding:0 6%;
+      box-shadow: 0 2px 24px rgba(37,99,235,0.08);
+    }
+    .nav-logo { display:flex; align-items:center; gap:10px; text-decoration:none; margin-right:auto; }
+    .nav-logo-icon { width:38px; height:38px; background:linear-gradient(135deg,#1e3a5f,#2563EB); border-radius:10px; display:flex; align-items:center; justify-content:center; box-shadow:0 4px 12px rgba(37,99,235,0.3); }
+    .nav-logo-name { font-size:15px; font-weight:800; color:var(--dark); letter-spacing:-.3px; }
+    .nav-logo-name em { font-style:normal; color:var(--blue); }
+    .nav-logo-by { font-size:10px; font-weight:500; color:var(--muted); }
+    .nav-back { font-size:13px; font-weight:500; color:var(--muted); text-decoration:none; display:flex; align-items:center; gap:6px; padding:7px 14px; border-radius:8px; transition:background .2s, color .2s; }
+    .nav-back:hover { background:var(--blue-soft); color:var(--blue); }
+
+    /* ── PÁGINA ── */
+    .page {
+      min-height: 100vh;
+      display: flex; align-items: center;
+      padding: 100px 6% 60px;
+      position: relative; overflow: hidden;
+    }
+    .blob1 { position:absolute; top:-150px; right:-100px; width:700px; height:700px; border-radius:50%; background:radial-gradient(circle, rgba(37,99,235,0.07) 0%, transparent 70%); pointer-events:none; }
+    .blob2 { position:absolute; bottom:-100px; left:10%; width:500px; height:500px; border-radius:50%; background:radial-gradient(circle, rgba(16,185,129,0.06) 0%, transparent 70%); pointer-events:none; }
+
+    .page-inner {
+      max-width: 1100px; margin: 0 auto; width: 100%;
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 80px; align-items: center; position: relative; z-index: 1;
+    }
+
+    /* ── ESQUERDA ── */
+    .left-side { animation: fadeUp .5s ease both; }
+    .left-badge { display:inline-flex; align-items:center; gap:8px; background:white; border:1px solid var(--border); color:var(--blue); font-size:12px; font-weight:700; padding:6px 14px; border-radius:100px; margin-bottom:22px; box-shadow:0 2px 8px rgba(37,99,235,0.10); }
+    .live-dot { width:7px; height:7px; border-radius:50%; background:var(--green); animation:pulse 2s infinite; }
+    .left-side h1 { font-size:clamp(28px,3vw,44px); font-weight:900; line-height:1.15; letter-spacing:-1.5px; color:var(--dark); margin-bottom:18px; }
+    .left-side h1 em { font-style:normal; color:var(--blue); }
+    .left-side h1 span { color:var(--green); }
+    .left-desc { font-size:16px; color:var(--muted); line-height:1.75; margin-bottom:32px; max-width:400px; }
+
+    .stats-row { display:flex; flex-direction:column; gap:14px; animation:fadeUp .5s .15s ease both; }
+    .stat-item { display:flex; align-items:center; gap:14px; background:white; border:1px solid var(--border); border-radius:14px; padding:14px 18px; box-shadow:0 2px 12px rgba(37,99,235,0.07); transition:transform .2s, box-shadow .2s; }
+    .stat-item:hover { transform:translateY(-2px); box-shadow:0 6px 20px rgba(37,99,235,0.12); }
+    .stat-icon { width:40px; height:40px; border-radius:10px; display:flex; align-items:center; justify-content:center; flex-shrink:0; font-size:11px; font-weight:800; }
+    .stat-icon.b { background:#EFF6FF; color:var(--blue); }
+    .stat-icon.g { background:#F0FDF4; color:var(--green); }
+    .stat-icon.p { background:#FAF5FF; color:#7C3AED; }
+    .stat-label { font-size:11px; font-weight:600; color:var(--muted); text-transform:uppercase; letter-spacing:.5px; }
+    .stat-value { font-size:17px; font-weight:800; color:var(--dark); margin-top:1px; }
+    .stat-value.green { color:var(--green); }
+    .stat-value.blue  { color:var(--blue); }
+
+    /* ── CARD ── */
+    .right-side { animation: fadeUp .5s .1s ease both; }
+    .login-card { background:white; border:1px solid var(--border); border-radius:24px; padding:40px; box-shadow:0 20px 60px rgba(37,99,235,0.12); position:relative; overflow:hidden; }
+    .login-card::before { content:''; position:absolute; top:0; left:0; right:0; height:4px; background:linear-gradient(90deg,var(--blue),var(--green)); }
+
+    .card-title { font-size:22px; font-weight:800; color:var(--dark); letter-spacing:-.5px; margin-bottom:5px; }
+    .card-sub { font-size:14px; color:var(--muted); line-height:1.5; margin-bottom:24px; }
+
+    /* tabs */
+    .tabs { display:flex; background:#F4F6FB; border:1px solid var(--border); border-radius:11px; padding:3px; gap:3px; margin-bottom:22px; }
+    .tab { flex:1; padding:9px; border-radius:8px; font-size:13px; font-weight:600; border:none; cursor:pointer; font-family:'Inter',sans-serif; transition:all .15s; color:var(--muted); background:none; }
+    .tab.on { background:white; color:var(--dark); box-shadow:0 1px 6px rgba(0,0,0,0.10); }
+
+    /* trial */
+    .trial-badge { display:flex; align-items:center; gap:10px; background:#F0FDF4; border:1px solid #BBF7D0; border-radius:10px; padding:10px 14px; margin-bottom:18px; }
+    .trial-dot { width:7px; height:7px; border-radius:50%; background:var(--green); animation:pulse 2s infinite; }
+    .trial-text { font-size:12px; font-weight:600; color:#166534; }
+    .trial-text span { display:block; font-size:11px; font-weight:400; color:var(--green-dark); margin-top:1px; }
+
+    /* campos */
+    .form-group { margin-bottom:16px; }
+    .form-label { display:block; font-size:11px; font-weight:700; color:#3D5070; text-transform:uppercase; letter-spacing:.5px; margin-bottom:6px; }
+    .form-field { position:relative; }
+    .field-icon { position:absolute; left:12px; top:50%; transform:translateY(-50%); pointer-events:none; color:var(--muted); display:flex; align-items:center; }
+    .form-input { width:100%; height:46px; padding:0 14px 0 40px; border:1.5px solid var(--border); border-radius:10px; color:var(--dark); font-size:14px; font-family:'Inter',sans-serif; outline:none; transition:border-color .2s, box-shadow .2s; background:white; }
+    .form-input:focus { border-color:var(--blue); box-shadow:0 0 0 3px rgba(37,99,235,0.10); }
+    .form-input::placeholder { color:#B0BEDD; }
+
+    .forgot-wrap { text-align:right; margin-top:-10px; margin-bottom:16px; }
+    .forgot-btn { background:none; border:none; cursor:pointer; font-family:'Inter',sans-serif; font-size:12px; color:var(--muted); transition:color .2s; }
+    .forgot-btn:hover { color:var(--blue); }
+
+    /* mensagens */
+    .msg-error { display:none; font-size:13px; color:#DC2626; background:#FEF2F2; border:1px solid #FECACA; border-radius:9px; padding:10px 14px; margin-bottom:14px; line-height:1.5; text-align:center; }
+    .msg-reset { display:none; font-size:13px; color:var(--green-dark); background:var(--green-light); border:1px solid #A7F3D0; border-radius:9px; padding:10px 14px; margin-bottom:14px; line-height:1.5; text-align:center; }
+
+    /* botão */
+    .btn-submit { width:100%; height:46px; background:linear-gradient(135deg,var(--blue),var(--blue-dark)); color:white; border:none; border-radius:11px; font-size:14px; font-weight:800; font-family:'Inter',sans-serif; cursor:pointer; display:flex; align-items:center; justify-content:center; gap:8px; box-shadow:0 4px 16px rgba(37,99,235,0.35); transition:transform .2s, box-shadow .2s; }
+    .btn-submit:hover { transform:translateY(-1px); box-shadow:0 8px 24px rgba(37,99,235,0.45); }
+    .btn-submit:disabled { opacity:.6; cursor:not-allowed; transform:none; }
+    .btn-submit.green-btn { background:linear-gradient(135deg,var(--green),var(--green-dark)); box-shadow:0 4px 16px rgba(16,185,129,0.35); }
+    .btn-submit.green-btn:hover { box-shadow:0 8px 24px rgba(16,185,129,0.45); }
+
+    .spinner { width:16px; height:16px; border:2px solid rgba(255,255,255,.35); border-top-color:white; border-radius:50%; animation:spin .6s linear infinite; flex-shrink:0; }
+
+    /* sucesso */
+    .success-area { display:none; text-align:center; padding:16px 0; }
+    .success-icon { width:56px; height:56px; border-radius:16px; background:var(--green-light); border:1px solid #A7F3D0; display:flex; align-items:center; justify-content:center; margin:0 auto 16px; }
+    .success-area h3 { font-size:18px; font-weight:800; color:var(--dark); margin-bottom:8px; }
+    .success-area p { font-size:14px; color:var(--muted); line-height:1.65; }
+    .success-back { display:inline-block; margin-top:20px; font-size:13px; font-weight:700; color:white; background:linear-gradient(135deg,var(--blue),var(--blue-dark)); padding:10px 24px; border-radius:9px; text-decoration:none; cursor:pointer; border:none; font-family:'Inter',sans-serif; box-shadow:0 4px 14px rgba(37,99,235,.3); }
+
+    /* footer card */
+    .card-footer { text-align:center; margin-top:20px; font-size:13px; color:var(--muted); }
+    .card-footer a { color:var(--blue); font-weight:600; text-decoration:none; }
+    .card-footer a:hover { text-decoration:underline; }
+
+    @media (max-width:860px) {
+      .page-inner { grid-template-columns:1fr; gap:40px; }
+      .left-side { order:2; }
+      .right-side { order:1; }
+      .stats-row { display:none; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="/landing.html" class="nav-logo">
+    <div class="nav-logo-icon">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+    </div>
+    <div style="line-height:1.2;">
+      <div class="nav-logo-name">Sobrou <em>Quanto</em> ML</div>
+      <div class="nav-logo-by">by ProspectIA</div>
+    </div>
+  </a>
+  <a href="/landing.html" class="nav-back">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+    Voltar ao início
+  </a>
+</nav>
+
+<div class="page">
+  <div class="blob1"></div>
+  <div class="blob2"></div>
+  <div class="page-inner">
+
+    <!-- ESQUERDA -->
+    <div class="left-side">
+      <div class="left-badge"><span class="live-dot"></span>Acesse sua conta</div>
+      <h1>Bem-vindo de volta.<br>Seus <em>números</em><br><span>te esperam.</span></h1>
+      <p class="left-desc">Faça login para acessar sua conciliação, DRE e relatórios com dados 100% reais do Mercado Livre.</p>
+      <div class="stats-row">
+        <div class="stat-item">
+          <div class="stat-icon b">$</div>
+          <div><div class="stat-label">Lucro líquido</div><div class="stat-value green">+ R$ 8.420,00</div></div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-icon g">%</div>
+          <div><div class="stat-label">Margem real</div><div class="stat-value blue">18,4%</div></div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-icon p">DRE</div>
+          <div><div class="stat-label">Resultado do mês</div><div class="stat-value">Atualizado agora</div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- DIREITA -->
+    <div class="right-side">
+      <div class="login-card">
+
+        <div class="card-title" id="card-title">Entrar na conta</div>
+        <div class="card-sub"   id="card-sub">Informe seu e-mail e senha para acessar o sistema.</div>
+
+        <div class="tabs" id="tabs">
+          <button class="tab on" id="tab-login"    onclick="setModo('login')">Entrar</button>
+          <button class="tab"    id="tab-cadastro" onclick="setModo('cadastro')">Criar conta</button>
+        </div>
+
+        <div class="trial-badge" id="trial-badge" style="display:none;">
+          <span class="trial-dot"></span>
+          <div class="trial-text">7 dias grátis, sem cartão de crédito<span>Cancele quando quiser, sem burocracia</span></div>
+        </div>
+
+        <div id="form-area">
+          <div class="form-group">
+            <label class="form-label">E-mail</label>
+            <div class="form-field">
+              <span class="field-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></span>
+              <input class="form-input" type="email" id="inp-email" placeholder="seu@email.com" />
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Senha</label>
+            <div class="form-field">
+              <span class="field-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></span>
+              <input class="form-input" type="password" id="inp-pass" placeholder="••••••••" />
+            </div>
+          </div>
+          <div class="forgot-wrap" id="forgot-wrap">
+            <button class="forgot-btn" onclick="enviarReset()">Esqueci minha senha</button>
+          </div>
+          <div class="msg-reset" id="msg-reset"></div>
+          <div class="msg-error" id="msg-error"></div>
+          <button class="btn-submit" id="btn-submit" onclick="handleSubmit()">
+            <span id="btn-text">Entrar</span>
+          </button>
+        </div>
+
+        <div class="success-area" id="success-area">
+          <div class="success-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#10B981" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          </div>
+          <h3>Conta criada!</h3>
+          <p>Verifique seu e-mail para confirmar a conta antes de fazer o login.</p>
+          <button class="success-back" onclick="setModo('login')">Ir para o login</button>
+        </div>
+
+        <div class="card-footer" id="card-footer">
+          Ainda não tem conta? <a href="#" onclick="setModo('cadastro');return false;">Criar grátis</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+  const SUPA_URL = 'https://xouelriibnorzgzltyua.supabase.co';
+  const SUPA_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InhvdWVscmlpYm5vcnpnemx0eXVhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzk4NTIzMzIsImV4cCI6MjA5NTQyODMzMn0.G9FMcf2MxYRByK6eDaFHk79BTjNclZIrwgSUF8zoc3w';
+  let modo = 'login';
+
+  function setModo(m) {
+    modo = m;
+    document.getElementById('tab-login').classList.toggle('on', m === 'login');
+    document.getElementById('tab-cadastro').classList.toggle('on', m === 'cadastro');
+    document.getElementById('trial-badge').style.display = m === 'cadastro' ? 'flex' : 'none';
+    document.getElementById('forgot-wrap').style.display = m === 'login' ? 'block' : 'none';
+    document.getElementById('tabs').style.display = 'flex';
+    document.getElementById('card-title').textContent = m === 'login' ? 'Entrar na conta' : 'Criar sua conta';
+    document.getElementById('card-sub').textContent   = m === 'login' ? 'Informe seu e-mail e senha para acessar o sistema.' : 'Preencha os dados abaixo e comece seu período grátis.';
+    document.getElementById('btn-text').textContent   = m === 'login' ? 'Entrar' : 'Criar conta grátis';
+    document.getElementById('btn-submit').className   = 'btn-submit' + (m === 'cadastro' ? ' green-btn' : '');
+    document.getElementById('card-footer').innerHTML  = m === 'login'
+      ? 'Ainda não tem conta? <a href="#" onclick="setModo(\'cadastro\');return false;">Criar grátis</a>'
+      : 'Já tem conta? <a href="#" onclick="setModo(\'login\');return false;">Entrar</a>';
+    document.getElementById('form-area').style.display    = 'block';
+    document.getElementById('success-area').style.display = 'none';
+    setErr(''); setReset('');
+  }
+
+  function setErr(msg)   { const e = document.getElementById('msg-error'); e.textContent = msg; e.style.display = msg ? 'block' : 'none'; }
+  function setReset(msg) { const e = document.getElementById('msg-reset'); e.textContent = msg; e.style.display = msg ? 'block' : 'none'; }
+  function setLoading(on) {
+    const btn = document.getElementById('btn-submit');
+    btn.disabled = on;
+    document.getElementById('btn-text').innerHTML = on ? '<span class="spinner"></span>' : (modo === 'login' ? 'Entrar' : 'Criar conta grátis');
+  }
+
+  async function supaFetch(path, body) {
+    const r = await fetch(SUPA_URL + path, { method:'POST', headers:{'Content-Type':'application/json','apikey':SUPA_KEY,'Authorization':'Bearer '+SUPA_KEY}, body:JSON.stringify(body) });
+    return r.json();
+  }
+
+  async function handleSubmit() {
+    const email = document.getElementById('inp-email').value.trim();
+    const pass  = document.getElementById('inp-pass').value;
+    setErr(''); setReset('');
+    if (!email || !pass) { setErr('Preencha e-mail e senha.'); return; }
+    if (pass.length < 6) { setErr('A senha precisa ter pelo menos 6 caracteres.'); return; }
+    setLoading(true);
+    try {
+      if (modo === 'login') {
+        const data = await supaFetch('/auth/v1/token?grant_type=password', { email, password: pass });
+        if (!data.access_token) {
+          const msg = data.error_description || data.msg || data.error || '';
+          if (msg.toLowerCase().includes('email not confirmed') || msg.toLowerCase().includes('email_not_confirmed')) setErr('Confirme seu e-mail na caixa de entrada antes de entrar.');
+          else if (msg.toLowerCase().includes('invalid') || msg.toLowerCase().includes('credentials')) setErr('E-mail ou senha incorretos.');
+          else setErr(msg || 'Erro ao entrar. Tente novamente.');
+          return;
+        }
+        const token = data.access_token, userId = data.user?.id;
+        if (userId) {
+          try {
+            const res  = await fetch(`${SUPA_URL}/rest/v1/sobra_quanto_users?id=eq.${userId}&select=plano_ativo,trial_expira_em`, { headers:{'apikey':SUPA_KEY,'Authorization':'Bearer '+token} });
+            const rows = await res.json();
+            const user = Array.isArray(rows) ? rows[0] : null;
+            if (user && !user.plano_ativo) {
+              const trialOk = user.trial_expira_em && new Date(user.trial_expira_em) > new Date();
+              if (!trialOk) {
+                document.getElementById('modal-trial-expirado').style.display = 'flex';
+                setLoading(false);
+                return;
+              }
+            }
+          } catch { /* banco indisponivel — prossegue com o login */ }
+        }
+        // Salva no formato exato que o @supabase/supabase-js espera
+        const PROJECT_REF = 'xouelriibnorzgzltyua';
+        const storageKey  = `sb-${PROJECT_REF}-auth-token`;
+        const sessionObj  = {
+          access_token:  data.access_token,
+          refresh_token: data.refresh_token,
+          expires_in:    data.expires_in,
+          expires_at:    data.expires_at ?? Math.floor(Date.now() / 1000) + (data.expires_in || 3600),
+          token_type:    data.token_type || 'bearer',
+          user:          data.user
+        };
+        localStorage.setItem(storageKey, JSON.stringify(sessionObj));
+        window.location.href = '/';
+      } else {
+        const data = await supaFetch('/auth/v1/signup', { email, password: pass, options:{ emailRedirectTo: window.location.origin } });
+        if (data.error || data.error_description) { setErr(data.error_description || data.error || 'Erro ao criar conta. Tente novamente.'); return; }
+        document.getElementById('form-area').style.display    = 'none';
+        document.getElementById('success-area').style.display = 'block';
+        document.getElementById('tabs').style.display         = 'none';
+        document.getElementById('trial-badge').style.display  = 'none';
+        document.getElementById('card-footer').style.display  = 'none';
+      }
+    } catch(e) { setErr('Erro de conexão. Tente novamente.'); }
+    finally { setLoading(false); }
+  }
+
+  async function enviarReset() {
+    const email = document.getElementById('inp-email').value.trim();
+    if (!email) { setErr('Digite seu e-mail acima para redefinir a senha.'); return; }
+    setErr('');
+    try { await supaFetch('/auth/v1/recover', { email }); setReset('Link enviado para ' + email + '. Verifique sua caixa de entrada.'); }
+    catch(e) { setErr('Erro ao enviar e-mail. Tente novamente.'); }
+  }
+
+  document.addEventListener('keydown', e => { if (e.key === 'Enter') handleSubmit(); });
+
+  // ─── Redefinição de senha ─────────────────────────────────────────
+  let recoveryToken = null;
+
+  function showRecoveryForm(token) {
+    recoveryToken = token;
+    document.getElementById('tabs').style.display        = 'none';
+    document.getElementById('forgot-wrap').style.display = 'none';
+    document.getElementById('card-footer').innerHTML     = '';
+    document.getElementById('card-title').textContent    = 'Criar nova senha';
+    document.getElementById('card-sub').textContent      = 'Digite e confirme sua nova senha para acessar o sistema.';
+    const lock = `<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>`;
+    document.getElementById('form-area').innerHTML = `
+      <div class="form-group">
+        <label class="form-label">Nova senha</label>
+        <div class="form-field">
+          <span class="field-icon">${lock}</span>
+          <input class="form-input" type="password" id="inp-newpass" placeholder="Mínimo 6 caracteres" />
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Confirmar senha</label>
+        <div class="form-field">
+          <span class="field-icon">${lock}</span>
+          <input class="form-input" type="password" id="inp-confirmpass" placeholder="Repita a senha" />
+        </div>
+      </div>
+      <div class="msg-error" id="msg-recovery-error"></div>
+      <button class="btn-submit green-btn" id="btn-recovery" onclick="saveRecoveryPassword()">
+        <span id="btn-recovery-text">Salvar nova senha</span>
+      </button>
+    `;
+  }
+
+  async function saveRecoveryPassword() {
+    const pass    = document.getElementById('inp-newpass').value;
+    const confirm = document.getElementById('inp-confirmpass').value;
+    const errEl   = document.getElementById('msg-recovery-error');
+    errEl.style.display = 'none';
+    if (pass.length < 6)   { errEl.textContent = 'A senha precisa ter pelo menos 6 caracteres.'; errEl.style.display = 'block'; return; }
+    if (pass !== confirm)  { errEl.textContent = 'As senhas não coincidem.'; errEl.style.display = 'block'; return; }
+    const btn = document.getElementById('btn-recovery');
+    btn.disabled = true;
+    document.getElementById('btn-recovery-text').innerHTML = '<span class="spinner"></span>';
+    try {
+      const res  = await fetch(`${SUPA_URL}/auth/v1/user`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json', 'apikey': SUPA_KEY, 'Authorization': 'Bearer ' + recoveryToken },
+        body: JSON.stringify({ password: pass })
+      });
+      const data = await res.json();
+      if (data.id || data.email) {
+        window.location.href = '/';
+      } else {
+        errEl.textContent = data.msg || data.error_description || data.message || 'Erro ao salvar. Tente novamente.';
+        errEl.style.display = 'block';
+        btn.disabled = false;
+        document.getElementById('btn-recovery-text').textContent = 'Salvar nova senha';
+      }
+    } catch {
+      errEl.textContent = 'Erro de conexão. Tente novamente.';
+      errEl.style.display = 'block';
+      btn.disabled = false;
+      document.getElementById('btn-recovery-text').textContent = 'Salvar nova senha';
+    }
+  }
+
+  // Detecta link de recuperação na URL (hash ou query params)
+  (function initRecovery() {
+    const hash  = new URLSearchParams(window.location.hash.substring(1));
+    const query = new URLSearchParams(window.location.search);
+    const type  = hash.get('type') || query.get('type');
+    const token = hash.get('access_token');
+    const tokenHash = query.get('token_hash');
+    if (type !== 'recovery') return;
+    if (token) {
+      showRecoveryForm(token);
+    } else if (tokenHash) {
+      fetch(`${SUPA_URL}/auth/v1/verify`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'apikey': SUPA_KEY },
+        body: JSON.stringify({ token_hash: tokenHash, type: 'recovery' })
+      }).then(r => r.json()).then(data => { if (data.access_token) showRecoveryForm(data.access_token); }).catch(() => {});
+    }
+  })();
+</script>
+
+<!-- MODAL TRIAL EXPIRADO -->
+<div id="modal-trial-expirado" style="display:none;position:fixed;inset:0;z-index:9999;background:rgba(10,14,28,.75);backdrop-filter:blur(6px);align-items:center;justify-content:center;padding:20px;">
+  <div style="background:white;border-radius:20px;width:100%;max-width:400px;overflow:hidden;position:relative;animation:modalIn .25s ease">
+    <div style="height:4px;background:linear-gradient(90deg,#EF4444,#DC2626)"></div>
+    <div style="padding:32px 28px 28px">
+      <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#DC2626;margin-bottom:12px;display:flex;align-items:center;gap:6px">
+        <span style="width:7px;height:7px;border-radius:50%;background:#EF4444;display:inline-block"></span>
+        Acesso expirado
+      </div>
+      <span style="display:inline-block;font-size:10px;font-weight:700;padding:3px 10px;border-radius:99px;background:#FEE2E2;color:#DC2626;margin-bottom:16px">Seu trial encerrou</span>
+      <h2 style="font-size:20px;font-weight:900;color:#0D1526;letter-spacing:-.5px;line-height:1.25;margin-bottom:10px">Seus 7 dias acabaram.<br><span style="color:#EF4444">Não perca seus dados.</span></h2>
+      <p style="font-size:13px;color:#6A82A8;line-height:1.75;margin-bottom:20px">Você usou o Sobrou Quanto ML gratuitamente. Para continuar acessando sua conciliação, DRE e histórico, assine agora.</p>
+      <a href="https://pay.kiwify.com.br/EmsV7Oz" target="_blank" style="display:block;width:100%;padding:13px;border-radius:10px;border:none;cursor:pointer;font-size:14px;font-weight:800;color:white;background:linear-gradient(135deg,#EF4444,#DC2626);box-shadow:0 4px 16px rgba(239,68,68,.3);margin-bottom:10px;text-align:center;text-decoration:none">
+        Assinar agora — R$ 49,90/mês
+      </a>
+      <div style="text-align:center;font-size:12px;color:#9AAAC5">
+        Já assinou? <a href="#" onclick="document.getElementById('modal-trial-expirado').style.display='none';return false;" style="color:#2563EB;font-weight:600;text-decoration:none">Tentar fazer login</a>
+      </div>
+    </div>
+  </div>
+</div>
+<style>
+@keyframes modalIn{from{opacity:0;transform:scale(.96) translateY(12px)}to{opacity:1;transform:none}}
+</style>
+
+</body>
+</html>
