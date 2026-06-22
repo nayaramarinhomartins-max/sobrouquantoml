@@ -13,16 +13,17 @@ USO:
 
 import requests
 import json
+import os
 from datetime import datetime, timezone, timedelta
 
 # ============================================================
-# ✏️  CONFIGURE AQUI
+# Configuracao via variaveis de ambiente ou arquivo .env
 # ============================================================
-SUPABASE_URL    = "https://xouelriibnorzgzltyua.supabase.co"
-SUPABASE_KEY    = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InhvdWVscmlpYm5vcnpnemx0eXVhIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc3OTg1MjMzMiwiZXhwIjoyMDk1NDI4MzMyfQ.T-vthIgssa5rI96R90X_Jgi7kMHgavmfJOp9x6OYR2I"
-ML_USER_ID      = "486592381"
-ML_CLIENT_ID    = "3946066402619314"
-ML_CLIENT_SECRET= "YUXQKCJBo0YkKP9NrjyUQZjJas8c7PwB"
+SUPABASE_URL    = os.getenv("SUPABASE_URL", "https://xouelriibnorzgzltyua.supabase.co")
+SUPABASE_KEY    = os.getenv("SUPABASE_SERVICE_KEY")
+ML_USER_ID      = os.getenv("ML_USER_ID", "486592381")
+ML_CLIENT_ID    = os.getenv("ML_CLIENT_ID", "3946066402619314")
+ML_CLIENT_SECRET= os.getenv("ML_CLIENT_SECRET")
 # ============================================================
 
 SUPABASE_HEADERS = {
